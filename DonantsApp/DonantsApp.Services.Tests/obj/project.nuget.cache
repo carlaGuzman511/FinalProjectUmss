@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MO1zbuzYECs=",
+  "dgSpecHash": "BBvt8OXXfSU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services.Tests\\DonantsApp.Services.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services.Tests\\DonantsApp.Services.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",

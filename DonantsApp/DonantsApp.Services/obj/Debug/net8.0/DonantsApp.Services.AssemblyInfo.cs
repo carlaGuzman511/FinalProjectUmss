@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DonantsApp.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2618f6ae81dbf03706b54c6edcd6bfccd33c2da1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0870deb8670fa47ff55f0ed5774056d92879237")]
 [assembly: System.Reflection.AssemblyProductAttribute("DonantsApp.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DonantsApp.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

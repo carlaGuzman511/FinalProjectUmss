@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {}
+    "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {
+    "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj",
         "projectName": "DonantsApp.Models",
-        "projectPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj",
+        "projectPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",

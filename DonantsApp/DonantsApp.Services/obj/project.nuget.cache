@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pr0GXFFPkOI=",
+  "dgSpecHash": "4i4mbMYzo6Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",

@@ -584,11 +584,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
       "projectName": "DonantsApp.Services",
-      "projectPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
+      "projectPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\DonantsApp.Services.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -606,11 +606,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj": {
-              "projectPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj"
+            "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj": {
+              "projectPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj"
             },
-            "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {
-              "projectPath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj"
+            "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj": {
+              "projectPath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.Models\\DonantsApp.Models.csproj"
             }
           }
         }

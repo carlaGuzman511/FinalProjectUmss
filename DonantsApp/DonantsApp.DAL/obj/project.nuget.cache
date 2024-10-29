@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ANwPLkaGvBI=",
+  "dgSpecHash": "LMNe6gVpO+8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\source\\repos\\test\\FinalProjectUmss\\DonantsApp\\DonantsApp.DAL\\DonantsApp.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
