@@ -1,0 +1,15 @@
+# Ignore .NET build directories for C# functions
+bin/
+obj/
+
+# Ignore local settings file for Azure Functions
+local.settings.json
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore logs
+logs/
+
+# Ignore Windows system files
+Thumbs.db
