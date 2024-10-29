@@ -1,0 +1,12 @@
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\bin\Debug\net8.0\DonantsApp.Models.deps.json
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\bin\Debug\net8.0\DonantsApp.Models.dll
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\bin\Debug\net8.0\DonantsApp.Models.pdb
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.AssemblyInfoInputs.cache
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.AssemblyInfo.cs
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.sourcelink.json
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.dll
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\refint\DonantsApp.Models.dll
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\DonantsApp.Models.pdb
+C:\Users\Asus\source\repos\FinalProjectUmss\DonantsApp\DonantsApp.Models\obj\Debug\net8.0\ref\DonantsApp.Models.dll
