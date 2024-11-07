@@ -1,7 +1,8 @@
 CREATE PROCEDURE SP_GetBloodTypes
-@BloodTypeId INT NULL
+@BloodTypeId INT NULL = NULL
 AS
 SELECT 
+	bloodType.Id,
 	bloodType.Description
 FROM dbo.BloodType bloodType
 WHERE 

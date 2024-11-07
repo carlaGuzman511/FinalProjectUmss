@@ -1,3 +1,7 @@
+using DonantsApp.DAL.Models.Interfaces;
+using DonantsApp.Models;
+using DonantsApp.Services.DonationTypes;
+using DonantsApp.Services.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -8,17 +12,20 @@ namespace DonantsApp.DonationTypes.Endpoints.Get
     public class DonationTypes
     {
         private readonly ILogger<DonationTypes> _logger;
-
-        public DonationTypes(ILogger<DonationTypes> logger)
+        private readonly IDonationTypeRepository _donationTypeRepository;
+        public DonationTypes(ILogger<DonationTypes> logger, IDonationTypeRepository donationTypeRepository)
         {
             _logger = logger;
+            _donationTypeRepository = donationTypeRepository;
         }
 
         [Function("GetDonationTypes")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "donationTypes")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "donationTypes")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            IDonationTypeService donationTypeService = new DonationTypeService(_donationTypeRepository);
+            IEnumerable<DonationType> donationTypes = await donationTypeService.GetDonationTypesAsync();
+
+            return new OkObjectResult(donationTypes);
         }
     }
 }

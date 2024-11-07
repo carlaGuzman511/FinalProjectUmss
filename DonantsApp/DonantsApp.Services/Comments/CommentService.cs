@@ -11,29 +11,25 @@ namespace DonantsApp.Services.Comments
         {
             this._commentRepository = commentRepository;
         }
-        public Task<Comment> CreateCommentAsync(Comment comment)
+        public async Task<Comment> CreateCommentAsync(Comment comment)
         {
-            throw new NotImplementedException();
+            //todo add commentvalidators, review post validators
+            return await _commentRepository.CreateComment(comment);
         }
 
-        public Task<bool> DeleteCommentAsync(int commentId)
+        public async Task<bool> DeleteCommentAsync(int commentId)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.DeleteComment(commentId);
         }
 
-        public Task<IEnumerable<Comment>> GetCommentByIdAsync(int commentId)
+        public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Comment>> GetCommentsAsync(int postId)
-        {
-            throw new NotImplementedException();
+           return await _commentRepository.GetCommentsByPostIdAsync(postId);
         }
 
         public Task<Comment> UpdateCommentAsync(Comment comment)
         {
-            throw new NotImplementedException();
+            return _commentRepository.UpdateComment(comment);
         }
     }
 }

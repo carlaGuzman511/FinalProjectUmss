@@ -4,9 +4,7 @@ namespace DonantsApp.DAL.Models.Interfaces
 {
     public interface ICommentRepository
     {
-        Task<IEnumerable<Comment>> GetCommentsAsync(int postId);
-
-        Task<Comment> GetCommentByIdAsync(int commentId);
+        Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId);
 
         Task<Comment> CreateComment(Comment comment);
 

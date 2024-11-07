@@ -4,9 +4,7 @@ namespace DonantsApp.Services.Models.Interfaces
 {
     public interface ICommentService
     {
-        Task<IEnumerable<Comment>> GetCommentsAsync(int postId);
-
-        Task<IEnumerable<Comment>> GetCommentByIdAsync(int commentId);
+        Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId);
 
         Task<Comment> CreateCommentAsync(Comment comment);
         

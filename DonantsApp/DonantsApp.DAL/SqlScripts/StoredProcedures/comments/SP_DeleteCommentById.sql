@@ -1,4 +1,4 @@
-ALTER PROCEDURE SP_DeleteComment
+CREATE PROCEDURE SP_DeleteCommentById
 	@CommentId INT
 AS
 DELETE comment

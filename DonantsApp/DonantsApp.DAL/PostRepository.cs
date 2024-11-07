@@ -33,13 +33,12 @@ namespace DonantsApp.DAL
         }
         public async Task DeletePostAsync(int postId)
         {
-            int? result;
             string sp = "SP_DeletePost";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PostId", postId);
-                await connection.QuerySingleAsync(
+                await connection.QuerySingleOrDefaultAsync(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
@@ -113,13 +112,12 @@ namespace DonantsApp.DAL
                 parameters.Add("@PostTypeId", post.PostType);
                 parameters.Add("@AccountId", post.Account);
                 parameters.Add("@Image", post.Image);
-                parameters.Add("@PostDate", post.PostDate);
-                int id = await connection.QuerySingleAsync<int>(
+                parameters.Add("@PostId", post.Id);
+                await connection.QuerySingleOrDefaultAsync<int>(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
                 );
-                post.Id = id;
             }
             return post;
         }

@@ -6,8 +6,9 @@ AS
 UPDATE comment
 SET
 	comment.Description = @Description, 
-	comment.PostId = @PostId
+	comment.DateChanged = GETDATE()
 FROM dbo.Comment comment
 INNER JOIN dbo.Post post
 ON post.Id = comment.PostId
 WHERE comment.Id = @CommentId
+AND post.Id = @PostId

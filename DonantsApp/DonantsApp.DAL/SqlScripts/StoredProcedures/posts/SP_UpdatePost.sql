@@ -5,14 +5,15 @@ CREATE PROCEDURE dbo.SP_UpdatePost
 	@Title VARCHAR(150),
 	@AccountId INT,
 	@PostTypeId INT,
-	@DonationTypeId INT = NULL
+	@DonationTypeId INT = NULL,
+	@StatusId INT
 
 AS
 
 UPDATE dbo.Post
 SET
 	PostDate = GETDATE(), 
-	StatusId = 1, 
+	StatusId = @StatusId, 
 	Image = @Image, 
 	Title = @Title,
 	Description = @Description, 
@@ -20,5 +21,3 @@ SET
 	PostTypeId = @PostTypeId, 
 	DonationTypeId = @DonationTypeId
 WHERE Id = @PostId
-
-SELECT SCOPE_IDENTITY()

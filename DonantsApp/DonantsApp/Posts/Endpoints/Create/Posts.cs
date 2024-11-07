@@ -1,6 +1,5 @@
 using DonantsApp.DAL.Models.Interfaces;
 using DonantsApp.Models;
-using DonantsApp.Models.Requests;
 using DonantsApp.Services.Models.Interfaces;
 using DonantsApp.Services.Posts;
 using Microsoft.AspNetCore.Http;

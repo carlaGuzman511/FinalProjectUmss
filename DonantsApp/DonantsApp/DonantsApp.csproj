@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\Models\" />
+    <Folder Include="BloodTypes - Copia\Models\" />
     <Folder Include="BloodTypes\Models\" />
     <Folder Include="Comments\Models\" />
     <Folder Include="DonationTypes\Models\" />

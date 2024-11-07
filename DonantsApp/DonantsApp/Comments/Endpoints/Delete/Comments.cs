@@ -1,3 +1,6 @@
+using DonantsApp.DAL.Models.Interfaces;
+using DonantsApp.Services.Comments;
+using DonantsApp.Services.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -8,17 +11,19 @@ namespace DonantsApp.Comments.Endpoints.Delete
     public class Comments
     {
         private readonly ILogger<Comments> _logger;
-
-        public Comments(ILogger<Comments> logger)
+        private readonly ICommentRepository _commentRepository;
+        public Comments(ILogger<Comments> logger, ICommentRepository commentRepository)
         {
             _logger = logger;
+            _commentRepository = commentRepository;
         }
 
         [Function("DeleteComment")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "delete", "comments/{commentId}")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "delete", Route = "comments/{commentId:int}")] HttpRequest req, int commentId)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            ICommentService commentService = new CommentService(_commentRepository);
+            await commentService.DeleteCommentAsync(commentId);
+            return new OkObjectResult(null);
         }
     }
 }

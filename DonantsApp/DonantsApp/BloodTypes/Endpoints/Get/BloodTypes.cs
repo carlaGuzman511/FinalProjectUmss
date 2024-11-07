@@ -1,3 +1,7 @@
+using DonantsApp.DAL.Models.Interfaces;
+using DonantsApp.Models;
+using DonantsApp.Services.BloodTypes;
+using DonantsApp.Services.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -5,20 +9,24 @@ using Microsoft.Extensions.Logging;
 
 namespace DonantsApp.BloodTypes.Endpoints.Get
 {
-    public class BloodTypes
+    public class PostTypes
     {
-        private readonly ILogger<BloodTypes> _logger;
+        private readonly ILogger<PostTypes> _logger;
+        private readonly IBloodTypeRepository _bloodTypeRepository;
 
-        public BloodTypes(ILogger<BloodTypes> logger)
+        public PostTypes(ILogger<PostTypes> logger, IBloodTypeRepository bloodTypeRepository)
         {
             _logger = logger;
+            _bloodTypeRepository = bloodTypeRepository;
         }
 
         [Function("GetBloodTypes")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "bloodTypes")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "bloodTypes")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            IBloodTypeService bloodTypeService = new BloodTypeService(_bloodTypeRepository);
+            IEnumerable<BloodType> bloodTypes = await bloodTypeService.GetBloodTypesAsync();
+
+            return new OkObjectResult(bloodTypes);
         }
     }
 }

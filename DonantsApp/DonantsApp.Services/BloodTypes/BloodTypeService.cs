@@ -11,9 +11,15 @@ namespace DonantsApp.Services.BloodTypes
         {
             this._bloodTypeRepository = bloodTypeRepository;
         }
-        public Task<IEnumerable<BloodType>> GetBloodTypesAsync()
+
+        public async Task<BloodType> GetBloodTypeAsync(int bloodTypeId)
         {
-            throw new NotImplementedException();
+            return await _bloodTypeRepository.GetBloodTypeAsync(bloodTypeId);
+        }
+
+        public async Task<IEnumerable<BloodType>> GetBloodTypesAsync()
+        {
+            return await _bloodTypeRepository.GetBloodTypesAsync();
         }
     }
 }
