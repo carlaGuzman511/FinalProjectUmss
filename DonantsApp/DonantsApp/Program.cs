@@ -1,11 +1,5 @@
 using DonantsApp.DAL;
 using DonantsApp.DAL.Models.Interfaces;
-using DonantsApp.Services.Accounts;
-using DonantsApp.Services.BloodTypes;
-using DonantsApp.Services.Comments;
-using DonantsApp.Services.DonationTypes;
-using DonantsApp.Services.Models.Interfaces;
-using DonantsApp.Services.Posts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
@@ -21,11 +15,6 @@ var host = new HostBuilder()
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        //services.AddSingleton<IAccountService, AccountService>();
-        //services.AddSingleton<IPostService, PostService>();
-        //services.AddSingleton<ICommentService, CommentService>();
-        //services.AddSingleton<IBloodTypeService, BloodTypeService>();
-        //services.AddSingleton<IDonationTypeService, DonationTypeService>();
 
         services.AddSingleton<IPostRepository>(provider => new PostRepository(connectionString));
         services.AddSingleton<IAccountRepository>(provider => new AccountRepository(connectionString));
