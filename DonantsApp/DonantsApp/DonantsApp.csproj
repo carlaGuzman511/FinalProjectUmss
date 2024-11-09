@@ -7,6 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="BloodTypes - Copia\**" />
+    <EmbeddedResource Remove="BloodTypes - Copia\**" />
+    <None Remove="BloodTypes - Copia\**" />
+  </ItemGroup>
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.20.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.1.0" />
@@ -30,7 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\Models\" />
-    <Folder Include="BloodTypes - Copia\Models\" />
     <Folder Include="BloodTypes\Models\" />
     <Folder Include="Comments\Models\" />
     <Folder Include="DonationTypes\Models\" />

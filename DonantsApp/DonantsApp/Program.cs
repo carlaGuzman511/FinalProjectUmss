@@ -21,11 +21,11 @@ var host = new HostBuilder()
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        services.AddSingleton<IAccountService, AccountService>();
-        services.AddSingleton<IPostService, PostService>();
-        services.AddSingleton<ICommentService, CommentService>();
-        services.AddSingleton<IBloodTypeService, BloodTypeService>();
-        services.AddSingleton<IDonationTypeService, DonationTypeService>();
+        //services.AddSingleton<IAccountService, AccountService>();
+        //services.AddSingleton<IPostService, PostService>();
+        //services.AddSingleton<ICommentService, CommentService>();
+        //services.AddSingleton<IBloodTypeService, BloodTypeService>();
+        //services.AddSingleton<IDonationTypeService, DonationTypeService>();
 
         services.AddSingleton<IPostRepository>(provider => new PostRepository(connectionString));
         services.AddSingleton<IAccountRepository>(provider => new AccountRepository(connectionString));
