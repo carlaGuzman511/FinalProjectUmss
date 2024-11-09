@@ -8,7 +8,7 @@ namespace DonantsApp.Services.Models.Interfaces
 
         Task<Comment> CreateCommentAsync(Comment comment);
         
-        Task<Comment> UpdateCommentAsync(Comment comment);
+        Task<bool> UpdateCommentAsync(Comment comment);
         
         Task<bool> DeleteCommentAsync(int commentId);
     }

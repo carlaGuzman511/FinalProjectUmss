@@ -2,7 +2,6 @@
 using DonantsApp.Models;
 using DonantsApp.Services.Models.Interfaces;
 using DonantsApp.Services.Validators;
-using FluentValidation;
 
 namespace DonantsApp.Services.Posts
 {
@@ -13,38 +12,64 @@ namespace DonantsApp.Services.Posts
         { 
             this._postRepository = postRepository;
         }
-        public Task<Post> CreatePostAsync(Post post)
+        public async Task<Post> CreatePostAsync(Post post)
         {
             PostValidator postValidator = new PostValidator();
-            var result = postValidator.Validate(post, options => options.IncludeRuleSets("Create"));
-            return this._postRepository.CreatePost(post);
+            var erros = await postValidator.ValidateAsync(post);
+
+            if(erros.Errors.Any())
+            {
+                throw new ValidationException(erros.Errors);
+            }
+
+            return await this._postRepository.CreatePost(post);
         }
 
-        public async Task DeletePostAsync(int postId)
+        public async Task<bool> DeletePostAsync(int postId)
         {
-            await this._postRepository.DeletePostAsync(postId);
+            Post post = await this._postRepository.GetPostByIdAsync(postId);
+            if (post != null)
+            {
+                await this._postRepository.DeletePostAsync(postId);
+                return true;
+            }
+
+            return false;
         }
 
-        public Task<Post> GetPostByIdAsync(int postId)
+        public async Task<Post> GetPostByIdAsync(int postId)
         {
-            return this._postRepository.GetPostByIdAsync(postId);   
+            return await this._postRepository.GetPostByIdAsync(postId);   
         }
 
-        public Task<IEnumerable<Post>> GetPostsAsync(int? accountId = null)
+        public async Task<IEnumerable<Post>> GetPostsAsync(int? accountId = null)
         {
             if (accountId != null)
             {
-                return this._postRepository.GetPostsAsync(accountId);
+                return await this._postRepository.GetPostsAsync(accountId);
             }
             else
             {
-                return this._postRepository.GetPostsAsync();
+                return await this._postRepository.GetPostsAsync();
             }
         }
 
-        public Task<Post> UpdatePostAsync(Post post)
+        public async Task<bool> UpdatePostAsync(Post post)
         {
-            return this._postRepository.UpdatePostAsync(post);
+            Post oldPost = await this._postRepository.GetPostByIdAsync(post.Id);
+            if (oldPost != null)
+            {
+                PostValidator postValidator = new PostValidator();
+                var erros = await postValidator.ValidateAsync(post);
+                if (erros.Errors.Any())
+                {
+                    throw new ValidationException(erros.Errors);
+                }
+                await this._postRepository.UpdatePostAsync(post);
+                return true;
+            }
+
+            return false;
         }
     }
 }

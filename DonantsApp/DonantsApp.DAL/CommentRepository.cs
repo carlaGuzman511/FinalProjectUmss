@@ -8,29 +8,34 @@ namespace DonantsApp.DAL
 {
     public class CommentRepository : ICommentRepository
     {
-        internal readonly string connectionString = @"Server=localhost\SQLEXPRESS;Database=DonantsApp;Trusted_Connection=True;";
-
-        public async Task<Comment> CreateComment(Comment comment)
+        private readonly string _connectionString;
+        public CommentRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+        public async Task<Comment> CreateCommentAsync (Comment comment)
         {
             string sp = "SP_CreateComment";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PostId", comment.PostId);
                 parameters.Add("@Description", comment.Description);
-                int id = await connection.QuerySingleAsync<int>(
+                var (id, dateadded) = await connection.QuerySingleAsync<(int, DateTime)>(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
                 );
                 comment.Id = id;
+                comment.DateAdded = dateadded;
             }
+
             return comment;
         }
-        public async Task<bool> DeleteComment(int commentId)
+        public async Task DeleteCommentAsync (int commentId)
         {
             string sp = "SP_DeleteCommentById";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CommentId", commentId);
@@ -40,17 +45,37 @@ namespace DonantsApp.DAL
                     commandType: CommandType.StoredProcedure
                 );
             }
-            return true;
+        }
+
+        public async Task<Comment> GetCommentByIdAsync(int commentId)
+        {
+            Comment comment = null;
+            string sp = "SP_GetCommentById";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Id", commentId);
+                comment = await connection.QuerySingleAsync<Comment>(
+                    sp,
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                );
+            }
+
+            return comment;
         }
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
         {
             IEnumerable<Comment> comments;
             string sp = "SP_GetCommentsByPostId";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@PostId", postId);
                 comments = await connection.QueryAsync<Comment>(
                     sp,
+                    parameters,
                     commandType: CommandType.StoredProcedure
                 );
             }
@@ -58,22 +83,20 @@ namespace DonantsApp.DAL
             return comments;
         }
 
-        public async Task<Comment> UpdateComment(Comment comment)
+        public async Task UpdateCommentAsync (Comment comment)
         {
             string sp = "SP_UpdateComment";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CommentId", comment.Id);
                 parameters.Add("@Description", comment.Description);
-                parameters.Add("@PostId", comment.PostId);
-                await connection.QuerySingleOrDefaultAsync<int>(
+                await connection.QuerySingleOrDefaultAsync<DateTime>(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
                 );
             }
-            return comment;
         }
     }
 }

@@ -14,12 +14,19 @@ namespace DonantsApp.Services.Comments
         public async Task<Comment> CreateCommentAsync(Comment comment)
         {
             //todo add commentvalidators, review post validators
-            return await _commentRepository.CreateComment(comment);
+            return await _commentRepository.CreateCommentAsync(comment);
         }
 
         public async Task<bool> DeleteCommentAsync(int commentId)
         {
-            return await _commentRepository.DeleteComment(commentId);
+            Comment oldComment = await _commentRepository.GetCommentByIdAsync(commentId);
+            if (oldComment != null)
+            {
+                await _commentRepository.DeleteCommentAsync(commentId);
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
@@ -27,9 +34,17 @@ namespace DonantsApp.Services.Comments
            return await _commentRepository.GetCommentsByPostIdAsync(postId);
         }
 
-        public Task<Comment> UpdateCommentAsync(Comment comment)
+        public async Task<bool> UpdateCommentAsync(Comment comment)
         {
-            return _commentRepository.UpdateComment(comment);
+            Comment oldComment = await _commentRepository.GetCommentByIdAsync(comment.Id);
+            if (oldComment != null)
+            {
+                oldComment.Description = comment.Description; 
+                await _commentRepository.UpdateCommentAsync(comment);
+                return true;
+            }
+
+            return false;
         }
     }
 }

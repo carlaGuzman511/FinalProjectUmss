@@ -5,24 +5,7 @@ ALTER PROCEDURE SP_GetPosts
 AS
 
 SELECT 
-	post.Id,
-	post.Title,
-	post.Description, 
-	post.Image Image, 
-	post.PostDate PostDate,
-	person.FirstName,
-	person.Id,
-	person.LastName,
-	person.PhoneNumber PhoneNumber, 
-	person.Image,
-	person.BloodTypeId,
-	donationType.Id DonationTypeId,
-	donationType.Description,
-	postType.Id PostTypeId,
-	postType.Description,
-	status.Id StatusId,
-	status.Description
-
+	post.*
 FROM dbo.Post post
 INNER JOIN dbo.Account account
 ON account.Id = post.AccountId

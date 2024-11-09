@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace DonantsApp.Posts.Endpoints.Delete
 {
@@ -22,9 +21,18 @@ namespace DonantsApp.Posts.Endpoints.Delete
         [Function("DeletePost")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "delete", Route="posts/{postId:int}")] HttpRequest req, int postId)
         {
-            IPostService postService = new PostService(_postRepository);
-            await postService.DeletePostAsync(postId);
-            return new OkObjectResult(null);
+            bool answer = false;
+            try
+            {
+                IPostService postService = new PostService(_postRepository);
+                answer = await postService.DeletePostAsync(postId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return new OkObjectResult(answer);
         }
     }
 }

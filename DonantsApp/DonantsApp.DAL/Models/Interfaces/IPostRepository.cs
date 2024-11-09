@@ -10,7 +10,7 @@ namespace DonantsApp.DAL.Models.Interfaces
 
         Task<Post> CreatePost(Post post);
 
-        Task<Post> UpdatePostAsync(Post post);
+        Task UpdatePostAsync(Post post);
 
         Task DeletePostAsync(int postId);
     }

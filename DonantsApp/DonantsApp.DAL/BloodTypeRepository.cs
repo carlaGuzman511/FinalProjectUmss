@@ -8,13 +8,16 @@ namespace DonantsApp.DAL
 {
     public class BloodTypeRepository : IBloodTypeRepository
     {
-        internal readonly string connectionString = @"Server=localhost\SQLEXPRESS;Database=DonantsApp;Trusted_Connection=True;";
-
+        private readonly string _connectionString;
+        public BloodTypeRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public async Task<BloodType> GetBloodTypeAsync(int bloodTypeId)
         {
             BloodType bloodType;
             string sp = "SP_GetBloodTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@BloodTypeId", bloodTypeId);
@@ -33,7 +36,7 @@ namespace DonantsApp.DAL
 
             IEnumerable<BloodType> bloodTypes;
             string sp = "SP_GetBloodTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 bloodTypes = await connection.QueryAsync<BloodType>(
                     sp,

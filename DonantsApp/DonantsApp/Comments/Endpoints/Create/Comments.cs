@@ -21,12 +21,21 @@ namespace DonantsApp.Comments.Endpoints.Create
         }
 
         [Function("CreateComment")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", "comments")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "comments")] HttpRequest req)
         {
-            ICommentService commentService = new CommentService(_commentRepository);
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Comment c = JsonConvert.DeserializeObject<Comment>(requestBody);
-            Comment comment = await commentService.CreateCommentAsync(c);
+            Comment comment = null;
+            try
+            {
+                ICommentService commentService = new CommentService(_commentRepository);
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                Comment c = JsonConvert.DeserializeObject<Comment>(requestBody);
+                comment = await commentService.CreateCommentAsync(c);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
             return new OkObjectResult(comment);
         }
     }

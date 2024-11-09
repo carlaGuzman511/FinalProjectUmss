@@ -8,12 +8,16 @@ namespace DonantsApp.DAL
 {
     public class DonationTypeRepository : IDonationTypeRepository
     {
-        internal readonly string connectionString = @"Server=localhost\SQLEXPRESS;Database=DonantsApp;Trusted_Connection=True;";
+        private readonly string _connectionString;
+        public DonationTypeRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public async Task<DonationType> GetDonationTypeAsync(int donationTypeId)
         {
             DonationType donationType;
             string sp = "SP_GetDonationTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@DonationTypeId", donationTypeId);
@@ -31,7 +35,7 @@ namespace DonantsApp.DAL
         {
             IEnumerable<DonationType> donationTypes;
             string sp = "SP_GetDonationTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 donationTypes = await connection.QueryAsync<DonationType>(
                     sp,

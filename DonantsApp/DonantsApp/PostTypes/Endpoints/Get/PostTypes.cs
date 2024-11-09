@@ -21,10 +21,18 @@ namespace DonantsApp.PostTypes.Endpoints.Get
         }
 
         [Function("GetPostTypes")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "postTypes")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "post-types")] HttpRequest req)
         {
-            IPostTypeService postTypeService = new PostTypeService(_postTypeRepository);
-            IEnumerable<PostType> postTypes = await postTypeService.GetPostTypesAsync();
+            IEnumerable<PostType> postTypes = new List<PostType>();
+            try
+            {
+                IPostTypeService postTypeService = new PostTypeService(_postTypeRepository);
+                postTypes = await postTypeService.GetPostTypesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
 
             return new OkObjectResult(postTypes);
         }

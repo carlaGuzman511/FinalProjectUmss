@@ -5,6 +5,7 @@ using DonantsApp.Services.Posts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -21,13 +22,33 @@ namespace DonantsApp.Posts.Endpoints.Create
         }
 
         [Function("CreatePost")]
-        public async Task<IActionResult> RunAsync([HttpTrigger(AuthorizationLevel.Function, "post", "posts")] HttpRequest req)
+        public async Task<IActionResult> RunAsync([HttpTrigger(AuthorizationLevel.Function, "post", Route = "posts")] HttpRequest req)
         {
-            IPostService postService = new PostService(_postRepository);
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Post p = JsonConvert.DeserializeObject<Post>(requestBody);
-            Post post = await postService.CreatePostAsync(p);
-            return new OkObjectResult(post);
+            try
+            {
+                IPostService postService = new PostService(_postRepository);
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                Post p = JsonConvert.DeserializeObject<Post>(requestBody);
+                Post post = await postService.CreatePostAsync(p);
+
+                return new OkObjectResult(post);
+            }//todo create our custom errors for handle the error 400
+            catch (ValidationException ex)
+            {
+                _logger.LogError(ex.ToString());
+                return new ObjectResult(ex.ToString())
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return new ObjectResult(ex.Message)
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                };
+            }
         }
     }
 }

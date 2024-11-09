@@ -6,10 +6,12 @@ namespace DonantsApp.DAL.Models.Interfaces
     {
         Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId);
 
-        Task<Comment> CreateComment(Comment comment);
+        Task<Comment> GetCommentByIdAsync(int commentId);
 
-        Task<Comment> UpdateComment(Comment comment);
+        Task<Comment> CreateCommentAsync (Comment comment);
 
-        Task <bool> DeleteComment(int commentId);
+        Task UpdateCommentAsync (Comment comment);
+
+        Task DeleteCommentAsync (int commentId);
     }
 }

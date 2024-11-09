@@ -23,12 +23,21 @@ namespace DonantsApp.Posts.Endpoints.Put
         [Function("UpdatePost")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "put", Route = "posts/{postId:int}")] HttpRequest req, int postId)
         {
-            IPostService postService = new PostService(_postRepository);
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Post p = JsonConvert.DeserializeObject<Post>(requestBody);
-            p.Id = postId;
-            Post post = await postService.UpdatePostAsync(p);
-            return new OkObjectResult(post);
+            bool result = false;
+            try
+            {
+                IPostService postService = new PostService(_postRepository);
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                Post p = JsonConvert.DeserializeObject<Post>(requestBody);
+                p.Id = postId;
+                result = await postService.UpdatePostAsync(p);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return new OkObjectResult(result);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace DonantsApp.Services.Models.Interfaces
         Task<IEnumerable<Post>> GetPostsAsync(int? accountId = null);
         Task<Post> GetPostByIdAsync(int postId);
         Task<Post> CreatePostAsync(Post post);
-        Task<Post> UpdatePostAsync(Post post);
-        Task DeletePostAsync(int postId);
+        Task<bool> UpdatePostAsync(Post post);
+        Task<bool> DeletePostAsync(int postId);
     }
 }

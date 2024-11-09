@@ -21,9 +21,18 @@ namespace DonantsApp.Comments.Endpoints.Delete
         [Function("DeleteComment")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "delete", Route = "comments/{commentId:int}")] HttpRequest req, int commentId)
         {
-            ICommentService commentService = new CommentService(_commentRepository);
-            await commentService.DeleteCommentAsync(commentId);
-            return new OkObjectResult(null);
+            bool answer = false;
+            try
+            {
+                ICommentService commentService = new CommentService(_commentRepository);
+                answer = await commentService.DeleteCommentAsync(commentId);
+            }
+            catch (Exception ex) 
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return new OkObjectResult(answer);
         }
     }
 }

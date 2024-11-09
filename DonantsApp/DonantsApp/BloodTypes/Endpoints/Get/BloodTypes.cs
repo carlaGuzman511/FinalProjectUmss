@@ -21,10 +21,19 @@ namespace DonantsApp.BloodTypes.Endpoints.Get
         }
 
         [Function("GetBloodTypes")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "bloodTypes")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "blood-types")] HttpRequest req)
         {
-            IBloodTypeService bloodTypeService = new BloodTypeService(_bloodTypeRepository);
-            IEnumerable<BloodType> bloodTypes = await bloodTypeService.GetBloodTypesAsync();
+            IEnumerable<BloodType> bloodTypes = new List<BloodType>();
+            try
+            {
+                IBloodTypeService bloodTypeService = new BloodTypeService(_bloodTypeRepository);
+                bloodTypes = await bloodTypeService.GetBloodTypesAsync();
+               
+            } //todo error 404, 400 validations, etc
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
 
             return new OkObjectResult(bloodTypes);
         }

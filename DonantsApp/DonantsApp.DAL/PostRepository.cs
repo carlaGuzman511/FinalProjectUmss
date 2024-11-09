@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DonantsApp.DAL.Models.Interfaces;
 using DonantsApp.Models;
-using DonantsApp.Models.Enums;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -9,11 +8,15 @@ namespace DonantsApp.DAL
 {
     public class PostRepository : IPostRepository
     {
-        internal readonly string connectionString = @"Server=localhost\SQLEXPRESS;Database=DonantsApp;Trusted_Connection=True;";
+        internal readonly string _connectionString;
+        public PostRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public async Task<Post> CreatePost(Post post)
         {
             string sp = "SP_CreatePost";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Title", post.Title);
@@ -29,16 +32,17 @@ namespace DonantsApp.DAL
                 );
                 post.Id = id;
             }
+         
             return post;
         }
         public async Task DeletePostAsync(int postId)
         {
             string sp = "SP_DeletePost";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PostId", postId);
-                await connection.QuerySingleOrDefaultAsync(
+                await connection.QueryAsync(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
@@ -49,23 +53,13 @@ namespace DonantsApp.DAL
         {
             IEnumerable<Post> posts;
             string sp = "SP_GetPosts";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@AccountId", accountId);
-                posts = await connection.QueryAsync<Post, Person, DonationType, PostType, Status, Post>(
+                posts = await connection.QueryAsync<Post>(
                     sp,
-                    (post, person, donationType, postType, status) =>
-                    {
-                        post.Account = new Account();
-                        post.Account.Person = person;
-                        post.DonationType = donationType;
-                        post.PostType = postType;
-                        post.Status = status;
-                        return post;
-                    },
                     parameters,
-                    splitOn: "FirstName, BloodTypeId, DonationTypeId, PostTypeId, StatusId",
                     commandType: CommandType.StoredProcedure
                 );
             }
@@ -74,52 +68,41 @@ namespace DonantsApp.DAL
         }
         public async Task<Post> GetPostByIdAsync(int postId)
         {
-            IEnumerable<Post> posts;
+            Post post = null;
             string sp = "SP_GetPosts";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PostId", postId);
-                posts = await connection.QueryAsync<Post, Person, DonationType, PostType, Status, Post>(
+                post = await connection.QuerySingleAsync<Post>(
                     sp,
-                    (post, person, donationType, postType, status) =>
-                    {
-                        post.Account = new Account();
-                        post.Account.Person = person;
-                        post.DonationType = donationType;
-                        post.PostType = postType;
-                        post.Status = status;
-                        return post;
-                    },
                     parameters,
-                    splitOn: "FirstName, BloodTypeId, DonationTypeId, StatusId",
                     commandType: CommandType.StoredProcedure
                 );
             }
 
-            return posts.First();
+            return post;
         }
-        public async Task<Post> UpdatePostAsync(Post post)
+        public async Task UpdatePostAsync(Post post)
         {
             string sp = "SP_UpdatePost";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Title", post.Title);
                 parameters.Add("@Description", post.Description);
-                parameters.Add("@DonationTypeId", post.DonationType);
-                parameters.Add("@StatusId", post.Status);
-                parameters.Add("@PostTypeId", post.PostType);
-                parameters.Add("@AccountId", post.Account);
+                parameters.Add("@DonationTypeId", post.DonationTypeId);
+                parameters.Add("@StatusId", post.StatusId);
+                parameters.Add("@PostTypeId", post.PostTypeId);
+                parameters.Add("@AccountId", post.AccountId);
                 parameters.Add("@Image", post.Image);
                 parameters.Add("@PostId", post.Id);
-                await connection.QuerySingleOrDefaultAsync<int>(
+                await connection.QueryAsync(
                     sp,
                     parameters,
                     commandType: CommandType.StoredProcedure
                 );
             }
-            return post;
         }
     }
 }

@@ -1,5 +1,5 @@
 CREATE PROCEDURE SP_GetPostTypes
-@PostTypeId INT NULL
+@PostTypeId INT NULL = NULL
 AS
 
 SELECT 

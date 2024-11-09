@@ -20,10 +20,18 @@ namespace DonantsApp.DonationTypes.Endpoints.Get
         }
 
         [Function("GetDonationTypes")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "donationTypes")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "donation-types")] HttpRequest req)
         {
-            IDonationTypeService donationTypeService = new DonationTypeService(_donationTypeRepository);
-            IEnumerable<DonationType> donationTypes = await donationTypeService.GetDonationTypesAsync();
+            IEnumerable<DonationType> donationTypes = new List<DonationType>();
+            try
+            {
+                IDonationTypeService donationTypeService = new DonationTypeService(_donationTypeRepository);
+                donationTypes = await donationTypeService.GetDonationTypesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
 
             return new OkObjectResult(donationTypes);
         }

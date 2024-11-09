@@ -9,12 +9,9 @@ namespace DonantsApp.Models
         public required string Description { get; set; }
         public string Image { get; set; }
         public DateTime PostDate { get; set; }
-        public Account Account { get; set; }
         public int AccountId { get; set; }
-        public DonationType DonationType { get; set; }
         public int DonationTypeId { get; set; }
-        public required PostType PostType { get; set; }
         public int PostTypeId { get; set; }
-        public Status Status { get; set; }
+        public Status StatusId { get; set; }
     }
 }

@@ -24,12 +24,21 @@ namespace DonantsApp.Comments.Endpoints.Put
         [Function("UpdateComment")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "put", Route = "comments/{commentId:int}")] HttpRequest req, int commentId)
         {
-            ICommentService commentService = new CommentService(_commentRepository);
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Comment c = JsonConvert.DeserializeObject<Comment>(requestBody);
-            c.Id = commentId;
-            Comment comment = await commentService.UpdateCommentAsync(c);
-            return new OkObjectResult(comment);
+            bool result = false;
+            try
+            {
+                ICommentService commentService = new CommentService(_commentRepository);
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                Comment c = JsonConvert.DeserializeObject<Comment>(requestBody);
+                c.Id = commentId;
+                result = await commentService.UpdateCommentAsync(c);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return new OkObjectResult(result);
         }
     }
 }

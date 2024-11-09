@@ -19,7 +19,7 @@ namespace DonantsApp.Services.PostTypes
 
         public async Task<IEnumerable<PostType>> GetPostTypesAsync()
         {
-            return await this.GetPostTypesAsync();
+            return await this._postTypeRepository.GetPostTypesAsync();
         }
     }
 }

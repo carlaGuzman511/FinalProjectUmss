@@ -8,12 +8,16 @@ namespace DonantsApp.DAL
 {
     public class PostTypeRepository : IPostTypeRepository
     {
-        internal readonly string connectionString = @"Server=localhost\SQLEXPRESS;Database=DonantsApp;Trusted_Connection=True;";
+        private readonly string _connectionString;
+        public PostTypeRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public async Task<PostType> GetPostTypeAsync(int postTypeId)
         {
             PostType postType;
             string sp = "SP_GetPostTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@PostTypeId", postTypeId);
@@ -31,7 +35,7 @@ namespace DonantsApp.DAL
         {
             IEnumerable<PostType> postTypes;
             string sp = "SP_GetPostTypes";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 postTypes = await connection.QueryAsync<PostType>(
                     sp,

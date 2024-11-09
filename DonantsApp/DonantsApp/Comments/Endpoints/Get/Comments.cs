@@ -21,10 +21,18 @@ namespace DonantsApp.Comments.Endpoints.Get
         }
 
         [Function("GetComments")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "comments/{postId:int}")] HttpRequest req, int postId)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "comments/posts/{postId:int}")] HttpRequest req, int postId)
         {
-            ICommentService commentService = new CommentService(_commentRepository);
-            IEnumerable<Comment> comments = await commentService.GetCommentsByPostIdAsync(postId);
+            IEnumerable<Comment> comments = new List<Comment>();
+            try
+            {
+                ICommentService commentService = new CommentService(_commentRepository);
+                comments = await commentService.GetCommentsByPostIdAsync(postId);
+            }
+            catch (Exception ex) 
+            {
+                _logger.LogError(ex.Message);
+            }
 
             return new OkObjectResult(comments);
         }

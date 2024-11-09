@@ -21,10 +21,19 @@ namespace DonantsApp.Posts.Endpoints.Get
         }
 
         [Function("GetPosts")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "posts")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "posts")] HttpRequest req)
         {
-            IPostService postService = new PostService(_postRepository);
-            IEnumerable<Post> posts = await postService.GetPostsAsync();
+            IEnumerable<Post> posts = new List<Post>();
+            try
+            {
+                IPostService postService = new PostService(_postRepository);
+                posts = await postService.GetPostsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
             return new OkObjectResult(posts);
         }
     }

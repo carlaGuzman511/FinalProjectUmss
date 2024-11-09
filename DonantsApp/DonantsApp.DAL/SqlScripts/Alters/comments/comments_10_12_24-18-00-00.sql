@@ -3,8 +3,8 @@ CREATE TABLE Comment
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Description VARCHAR(2000) NOT NULL,
 	PostId INT FOREIGN KEY REFERENCES Post(Id),
-	DateAdded DATETIME NOT NULL,
-	DateChanged DATETIME NOT NULL
+	DateAdded DATETIME,
+	DateChanged DATETIME
 )
 GO
 INSERT INTO Comment(Description, PostId, DateAdded, DateChanged)
