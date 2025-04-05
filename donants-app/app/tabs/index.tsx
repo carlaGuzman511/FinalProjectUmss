@@ -18,28 +18,30 @@ import { View, StyleSheet, Platform, Text, FlatList } from 'react-native';
 // import CardViewer from '@/components/CardViewer';
 // import Form from '@/components/Form';
 // import { Post } from '@/models/App.types';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GetStarted from './screens/GetStarted';
 import Home from './screens/Home';
 import Login from './screens/Login';
-import OnBoardingStarter from './screens/OnBoardingStarter';
 import OPTVerification from './screens/OPTVerification';
 import Register from './screens/Register';
 import ResetPassword from './screens/ResetPassword';
 import SuccessVerification from './screens/SuccessVerification';
+import OnBoardingStarter from './screens/OnBoardingStarter';
 
-export {
-  GetStarted,
-  Home,
-  Login,
-  OnBoardingStarter,
-  OPTVerification,
-  Register,
-  ResetPassword,
-  SuccessVerification
-};
+// export {
+//   GetStarted,
+//   Home,
+//   Login,
+//   OnBoardingStarter,
+//   OPTVerification,
+//   Register,
+//   ResetPassword,
+//   SuccessVerification
+// };
 
 export default function Index() {
+  const Stack = createNativeStackNavigator();
   // const [hideForm, setHideForm] = useState<boolean>(true);
   // const API_URL = 'http://localhost:7084/api/posts';
   // const [data, setData] = useState([]);
@@ -62,21 +64,61 @@ export default function Index() {
   // }
 
   return (
-    <>
-    </>
-    // <View style={styles.container}>
-    //   <CircleButton onPress={onCircleButtonIsPressed}/>
-    //   {hideForm ? <></> : <Form />}
-    //   <FlatList
-    //     data={data}
-    //     keyExtractor={(item: Post) => String(item.id)}
-    //     renderItem={({ item }) => (
-    //       <View style={styles.item}>
-    //         <CardViewer item={item}/>
-    //       </View>
-    //     )}
-    //   />
-    // </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="OnBoardingStarter"
+      >
+        <Stack.Screen
+          name="OnBoardingStarter"
+          component={OnBoardingStarter}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="GetStarted"
+          component={GetStarted}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="OPTVerification"
+          component={OPTVerification}
+          options={{
+          headerShown: false
+        }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
+          options={{
+          headerShown: false
+        }}
+        />
+        <Stack.Screen
+          name="SuccessVerification"
+          component={SuccessVerification}
+          options={{
+            headerShown: false
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

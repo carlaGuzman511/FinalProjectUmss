@@ -25,6 +25,8 @@
     <Folder Include="BloodTypes\" />
     <Folder Include="Comments\" />
     <Folder Include="DonationTypes\" />
+    <Folder Include="PostTypes\" />
+    <Folder Include="Validations\" />
     <Folder Include="Posts\" />
   </ItemGroup>
 

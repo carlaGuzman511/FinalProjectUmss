@@ -17,5 +17,6 @@ VALUES
 ('Huesos'),
 ('Piel'),
 ('Tendones'),
-('Medula Osea')
+('Medula Osea'),
+('Intestino Grueso')
 GO

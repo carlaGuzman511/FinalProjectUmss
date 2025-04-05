@@ -17,11 +17,11 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack>
+      {/* <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="light" />
+      <StatusBar style="light" /> */}
     </>
   );
 }
